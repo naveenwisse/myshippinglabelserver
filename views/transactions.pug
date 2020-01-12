@@ -1,0 +1,175 @@
+html
+  head
+      include head.pug
+      title Transactions
+  body
+    include nav.pug
+    
+    div.container
+      div.card.z-depth-2.card-horizontal
+        div.card-content
+          span.card-title.center-align TRANSACTIONS MANAGEMENT
+          input(type="text" id="search" placeholder="Find transaction by email or order id")
+          div.row
+            div.col.s12
+            if rows
+              if rows.length === 0
+                i NO RESULTS 
+              if rows.length > 0
+                ul.collapsible.z-depth-0(style="word-break:break-word")
+                  each elem, i in rows
+                    li
+                      div.collapsible-header.center
+                        div.row(style="width:100%")
+                          div.col.s12.m3
+                            b !{elem.email}
+                            br
+                            span !{elem.id} 
+                          div.col.s12.m3 !{elem.date}
+                          div.col.s12.m3 
+                            b !{elem.price} 
+                            | USD
+                          div.col.s12.m3 
+                            if elem.status === 1 
+                              b.green-text PAID
+                            if elem.status === 0
+                              b.grey-text PENDING
+                            if elem.status === 2
+                              b.red-text CANCELED
+                          
+                      div.collapsible-body
+                        div.row
+                          div.col.s12.m6
+                            i FROM
+                            table.striped
+                              tbody
+                                tr
+                                  td
+                                    b fullname: 
+                                  td !{elem.from_fullname}
+                                tr
+                                  td
+                                    b phone: 
+                                  td !{elem.from_phone}
+                                tr
+                                  td
+                                    b company: 
+                                  td !{elem.from_company}
+                                tr
+                                  td
+                                     b address: 
+                                  td !{elem.from_address}
+                                tr
+                                  td
+                                    b zip-code: 
+                                  td !{elem.from_zip}
+                                tr
+                                  td
+                                    b city: 
+                                  td !{elem.from_city}
+                          div.col.s12.m6
+                            i TO
+                            table.striped
+                              tbody
+                                tr
+                                  td
+                                    b fullname: 
+                                  td !{elem.to_fullname}
+                                tr
+                                  td
+                                    b phone: 
+                                  td !{elem.to_phone}
+                                tr
+                                  td
+                                    b company: 
+                                  td !{elem.to_company}
+                                tr
+                                  td
+                                     b address: 
+                                  td !{elem.to_address}
+                                tr
+                                  td
+                                    b zip-code: 
+                                  td !{elem.to_zip}
+                                tr
+                                  td
+                                    b city: 
+                                  td !{elem.to_city}
+                        div.row
+                          div.col.s12.m6
+                            i DETAILS
+                            table.striped
+                              tbody
+                                tr
+                                  td
+                                    b weight: 
+                                  td !{elem.weight}
+                                tr
+                                  td
+                                    b length: 
+                                  td !{elem.length}
+                                tr
+                                  td
+                                    b width: 
+                                  td !{elem.width}
+                                tr
+                                  td
+                                    b height: 
+                                  td !{elem.height}
+                                tr
+                                  td
+                                    b unit:
+                                  td !{elem.unit}
+                                tr
+                                  td
+                                    b adult signature:
+                                  td !{elem.adult_signature}
+                                tr
+                                  td 
+                                    b contains alcohol:
+                                  td !{elem.alcohol}          
+                          if elem.status === 1
+                            div.col.s12.m6
+                              i PAYMENT SUCCESFULL
+                              table.striped
+                                tbody
+                                  tr
+                                    td
+                                      b paid by: 
+                                    td !{elem.paid_by}
+                                  tr
+                                    td
+                                      b payment method: 
+                                    td !{elem.method}
+                                  tr
+                                    td
+                                      b label: 
+                                    td
+                                      a(href=elem.label) !{elem.label}
+                                  tr
+                                    td
+                                      b tracking: 
+                                    td !{elem.tracking}
+  script.
+    document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {
+      accordion:false
+      });
+    });
+    
+    input = document.getElementById("search");
+  
+    input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        // Do more work
+        
+        window.location.href = '/transactions/' + input.value;
+    }
+    });          
+
+
+                           
+
+        

@@ -1,0 +1,44 @@
+html
+  head
+    include head.pug
+    title Margins
+  body
+    include nav.pug
+    div.container
+      div.card.z-depth-2.card-horizontal
+        div.card-content
+          span.card-title.center-align INBOX
+          div.divider
+          div.section
+            p.grey-text Use this option to download all email addresses in CSV format to use in external email marketing software 
+            a(href="/emailcsv/1") NEWSLETTER SUBSCRIBERS
+            br
+            a(href="/emailcsv/2") ALL USERS    
+          div.divider
+          div.section
+            form#email.col.s12(action="/email" method="post" encrypt="multipart/form-data")
+              div.row
+                div.input-field.col.s12.m4
+                  select(form="email" name="recipients")
+                    option(value="0" selected) Newsletter Subsribers
+                    option(value="1") All Users 
+                  label Send to:   
+                div.input-field.col.s12.m8
+                  input#title( name="title" type="text")
+                  label(for="title") Email Title
+              div.row
+                div.input-field.col.s12 
+                  textarea#textarea.materialize-textarea(name="content")
+                  label(for="textarea") Email Body
+
+              div.row
+                div.col.s12.right-align
+                  input.btn.indigo.lighten-2(type="submit" value="SEND")
+
+
+script.
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+
+  });

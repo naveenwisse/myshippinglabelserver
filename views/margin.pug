@@ -1,0 +1,74 @@
+html
+  head
+      include head.pug
+      title Margins
+  body
+    include nav.pug
+    
+    div.container
+      div.card.z-depth-2.card-horizontal
+        div.card-content
+          span.card-title.center-align MARGINS MANAGEMENT
+          div.divider
+          each elem, i in rows
+            div.section
+              h5 
+                i !{elem.carrier}
+              form.col.s12( action="/updatecarrier/" + elem.id method="post" encrypt="multipart/form-data")
+                div.row
+                  div.input-field.col.s12.m6
+                    input(type="text" id="carrier_id" name="carrier_id" value=elem.carrier_id)
+                    label(for="carrier_id") Carrier Id
+                  div.input-field.col.s12.m6
+                    input(type="text" id="carrier_name" name="carrier" value=elem.carrier)
+                    label(for="carrier_name") Carrier Name
+                div.row
+                  div.input-field.col.s12.m6
+                    input(type="text" id="margin_p" name="margin_p" value=elem.margin_p)
+                    label(for="margin_p") Margin (percentage)
+                  div.input-field.col.s12.m6
+                    input(type="text" name="margin_value" id="margin_value" value=elem.margin_value)
+                    label(for="margin_value") Margin (USD)
+                div.row
+                  div.input-field.col.s12.m6
+                    input(type="text" id="logo" name="carrier_logo" value=elem.img_url)
+                    label(for="logo") Carrier Logo URL
+                div.row    
+                  div.col.s6
+                    button.btn.wave.grey.lighten-1.left-align Delete   
+                  div.col.s6.right-align      
+                    input.btn.wave.indigo.lighten-2(type="submit" value="Update")
+            div.divider
+          div.section
+            h5.grey-text
+              i ADD NEW CARRIER 
+            form.col.s12(method="post", action="/addcarier", encrypt="multipart/form-data" )
+              div.row
+                div.input-field.col.s12.m6
+                  input(type="text" name="carrier_id" id="carrier_id")
+                  label(for="carrier_id") Carrier Id
+                div.input-field.col.s12.m6
+                  input(type="text" name="carrier_name" id="carrier_name")
+                  label(for="carrier_name") Carrier Name
+              div.row
+                div.input-field.col.s12.m6
+                  input(type="text" name="margin_p" id="margin_p")
+                  label(for="margin_p") Margin (percentage)
+                div.input-field.col.s12.m6
+                  input(type="text" name="margin_value" id="margin_value")
+                  label(for="margin_value") Margin (USD)
+              div.row
+                  div.col.s12.right-align      
+                    input.btn.wave.indigo.lighten-2(type="submit" value="ADD")
+                
+            
+              
+                  
+              
+                  
+                        
+
+
+                           
+
+        

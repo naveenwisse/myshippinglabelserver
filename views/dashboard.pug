@@ -1,0 +1,73 @@
+html
+  head
+      include head.pug
+      title Dashboard
+  body
+    include nav.pug
+    
+    div.container.center
+      div.card.z-depth-2.card-horizontal
+        div.card-content
+          span.card-title USERS MANAGEMENT
+          input(type="text" id="search" onkeyup="search()" placeholder="Find user by email")
+          table.striped.responsive-table#userTable
+            thead 
+              tr 
+                th Email 
+                th Full Name
+                th Join Date
+                th Action
+            tbody
+              each elem, i in rows 
+                tr
+                  td !{elem.email}
+                  td !{elem.fullname}
+                  td !{elem.created_date}
+                  td 
+                    button.btn.waves-effect.indigo.lighten-3.align-right.waves-light(onclick="deleteUser('" + elem.user_id + "')") Delete
+script.
+  function search() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("userTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+  }
+  
+  function deleteUser(id) {
+    var r = confirm('are you sure you want to delete the user ? ');
+    if(r == true){
+      
+      console.log(id);
+      fetch("/deleteUser/" + id)
+     .then(response => response.json())
+     .then(function(data) {
+        M.toast({html: data.message})
+     })
+     .catch(function(error) {
+       // If there is any error you will catch them here
+       console.log(error);
+      M.toast({html:error})
+     });      
+    } else {
+      M.toast({html:"deletion canceled"})
+    }
+  } 
+
+                           
+
+        

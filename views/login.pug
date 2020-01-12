@@ -1,0 +1,28 @@
+html
+  head
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+    link(rel="stylesheet", href="/style.css", type='text/css' )
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Login | Shop2Ship Admin Panel
+  body
+    div.valign-wrapper(style="height:100%")
+      div.container.center
+        div.row
+          div.col.s12.m8.offset-m2
+            div.card.center
+              div.card-content
+                span.card-title Shop2Ship | Admin Panel | Log In
+                div.row
+                  form.col.s12(action="/auth" method="post")
+                    div.row
+                      div.col.s12.m8.offset-m2
+                        input(placeholder="username" name="username" type="text" id="username")
+                    div.row
+                      div.col.s12.m8.offset-m2
+                        input(placeholder="password" type="password" name="password" id="password")
+                    div.row
+                      div.col.s12
+                        button.btn.waves-effect.indigo.lighten-2.align-right.waves-light(type="submit") Log In
+                          i.material-icons.right send
